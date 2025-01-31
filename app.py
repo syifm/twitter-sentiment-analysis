@@ -67,7 +67,7 @@ df_tweet['sentiment'] = df_tweet['full_text'].apply(classify_sentiment)
 sentiment_counts = df_tweet['sentiment'].value_counts()
 
 # Buat figure
-fig, ax = plt.subplots(figsize=(4, 2))  # Tambahkan ini
+fig, ax = plt.subplots(figsize=(6, 4))  # Tambahkan ini
 
 sns.barplot(x=sentiment_counts.index, y=sentiment_counts.values,
             hue=sentiment_counts.index,

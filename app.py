@@ -11,7 +11,7 @@ y_pred = data["y_pred"]
 st.title("Evaluasi Model Naive Bayes")
 
 # Menampilkan Accuracy
-accuracy_knn = accuracy_score(y_test, y_pred)
+accuracy = accuracy_score(y_test, y_pred)
 st.subheader("Accuracy:")
 st.write(f"{accuracy:.4f}")
 

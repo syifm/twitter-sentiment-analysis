@@ -86,7 +86,7 @@ sns.barplot(x=sentiment_counts.index, y=sentiment_counts.values,
             palette={'positif': 'green', 'negatif': 'red', 'netral': 'gray'},
             legend=False)
 
-plt.title('Distribusi Sentimen')
+#plt.title('Distribusi Sentimen')
 plt.xlabel('Sentimen')
 plt.ylabel('Jumlah')
 

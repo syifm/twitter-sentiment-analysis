@@ -15,7 +15,10 @@ accuracy = accuracy_score(y_test, y_pred)
 st.subheader("Accuracy:")
 st.write(f"{accuracy:.4f}")
 
-# Menampilkan Classification Report
-report = classification_report(y_test, y_pred)
+# Mengubah classification report menjadi DataFrame
+report_dict = classification_report(y_test, y_pred, output_dict=True)
+report_df = pd.DataFrame(report_dict).transpose()
+
+# Menampilkan classification report dalam bentuk tabel
 st.subheader("Classification Report:")
-st.text(report)
+st.dataframe(report_df)

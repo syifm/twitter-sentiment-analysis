@@ -11,7 +11,7 @@ y_pred = data["y_pred"]
 st.title("Evaluasi Model Naive Bayes")
 
 # Menampilkan Accuracy
-accuracy = accuracy_score(y_test, y_pred)
+accuracy_knn = accuracy_score(y_test, y_pred)
 st.subheader("Accuracy:")
 st.write(f"{accuracy:.4f}")
 
@@ -32,14 +32,14 @@ y_pred_knn = data["y_pred_knn"]
 st.title("Evaluasi Model KNN")
 
 # Menampilkan Accuracy
-accuracy = accuracy_score(y_test_knn, y_pred_knn)
+accuracy_knn = accuracy_score(y_test_knn, y_pred_knn)
 st.subheader("Accuracy:")
-st.write(f"{accuracy:.4f}")
+st.write(f"{accuracy_knn:.4f}")
 
 # Mengubah classification report menjadi DataFrame
-report_dict = classification_report(y_test_knn, y_pred_knn, output_dict=True)
-report_df = pd.DataFrame(report_dict).transpose()
+report_dict_knn = classification_report(y_test_knn, y_pred_knn, output_dict=True)
+report_df_knn = pd.DataFrame(report_dict_knn).transpose()
 
 # Menampilkan classification report dalam bentuk tabel
 st.subheader("Classification Report:")
-st.dataframe(report_df)
+st.dataframe(report_df_knn)

@@ -25,8 +25,8 @@ st.dataframe(report_df)
 
 # Baca data hasil prediksi
 data = pd.read_csv("y_test_pred_knn.csv")
-y_test = data["y_test_knn"]
-y_pred = data["y_pred_knn"]
+y_test_knn = data["y_test_knn"]
+y_pred_knn = data["y_pred_knn"]
 
 # Menampilkan hasil evaluasi di Streamlit
 st.title("Evaluasi Model KNN")

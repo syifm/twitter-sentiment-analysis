@@ -20,6 +20,10 @@ df_tweet = pd.DataFrame(df[['full_text']])
 df_tweet['full_text'] = df_tweet['full_text'].str.lower()
 df_tweet.drop_duplicates(inplace=True)
 
+st.markdown("""
+# **Distribusi Sentimen** 
+""")
+
 def classify_sentiment(text):
     positive_phrases = [
         "kembali normal", "sudah lancar", "banyak nih", "cukup dengan", "menarik", "promo", "ganti telkomsel",

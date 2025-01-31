@@ -37,7 +37,7 @@ st.subheader("Accuracy:")
 st.write(f"{accuracy:.4f}")
 
 # Mengubah classification report menjadi DataFrame
-report_dict = classification_report(y_test, y_pred, output_dict=True)
+report_dict = classification_report(y_test_knn, y_pred_knn, output_dict=True)
 report_df = pd.DataFrame(report_dict).transpose()
 
 # Menampilkan classification report dalam bentuk tabel

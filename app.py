@@ -3,7 +3,7 @@ import numpy as np
 import re
 from nltk.corpus import stopwords
 
-df=pd.read_csv('/content/telkomsel.csv')
+df=pd.read_csv('telkomsel.csv')
 df_tweet = pd.DataFrame(df[['full_text']])
 df_tweet['full_text'] = df_tweet['full_text'].str.lower()
 df_tweet.drop_duplicates(inplace=True)

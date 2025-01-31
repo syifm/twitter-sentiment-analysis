@@ -13,21 +13,6 @@ st.title("Evaluasi Model Naive Bayes")
 # Menampilkan Accuracy
 accuracy = accuracy_score(y_test, y_pred)
 st.subheader("Accuracy:")
-st.write(f"{accuracyimport streamlit as st
-import pandas as pd
-from sklearn.metrics import classification_report, accuracy_score
-
-# Baca data hasil prediksi
-data = pd.read_csv("y_test_pred.csv")
-y_test = data["y_test"]
-y_pred = data["y_pred"]
-
-# Menampilkan hasil evaluasi di Streamlit
-st.title("Evaluasi Model Naive Bayes")
-
-# Menampilkan Accuracy
-accuracy = accuracy_score(y_test, y_pred)
-st.subheader("Accuracy:")
 st.write(f"{accuracy:.4f}")
 
 # Mengubah classification report menjadi DataFrame

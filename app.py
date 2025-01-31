@@ -7,6 +7,14 @@ import seaborn as sns
 import streamlit as st  
 from sklearn.metrics import classification_report, accuracy_score
 
+st.markdown("""
+# **Twitter Sentiment Analysis** 
+
+# ‼️**Tujuan**⁉️
+Untuk memahami persepsi pelanggan terhadap perusahaan dengan melakukan analisis sentimen terhadap ulasan pelanggan dan media sosial twitter. 
+Ini bertujuan untuk mengidentifikasi isu utama yang dihadapi perusahaan.          
+""")
+
 df=pd.read_csv('telkomsel.csv')
 df_tweet = pd.DataFrame(df[['full_text']])
 df_tweet['full_text'] = df_tweet['full_text'].str.lower()

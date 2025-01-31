@@ -1,5 +1,7 @@
 import streamlit as st
 import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
 from sklearn.metrics import classification_report, accuracy_score
 
 # Baca data hasil prediksi
@@ -7,7 +9,28 @@ data = pd.read_csv("y_test_pred.csv")
 y_test = data["y_test"]
 y_pred = data["y_pred"]
 
-# Menampilkan hasil evaluasi di Streamlit
+# **1. Membuat Diagram Distribusi Sentimen**
+st.title("Analisis Sentimen")
+
+# Buat DataFrame untuk menghitung distribusi sentimen
+sentiment_counts = pd.Series(y_test).value_counts()
+
+# Buat plot distribusi sentimen
+fig, ax = plt.subplots()
+sns.barplot(x=sentiment_counts.index, y=sentiment_counts.values,
+            hue=sentiment_counts.index,
+            palette={'positif': 'green', 'negatif': 'red', 'netral': 'gray'},
+            legend=False,
+            ax=ax)
+
+ax.set_title("Distribusi Sentimen")
+ax.set_xlabel("Sentimen")
+ax.set_ylabel("Jumlah")
+
+# Tampilkan plot di Streamlit
+st.pyplot(fig)
+
+# **2. Evaluasi Model Naive Bayes**
 st.title("Evaluasi Model Naive Bayes")
 
 # Menampilkan Accuracy
@@ -23,15 +46,15 @@ report_df = pd.DataFrame(report_dict).transpose()
 st.subheader("Classification Report:")
 st.dataframe(report_df)
 
-# Baca data hasil prediksi
-data = pd.read_csv("y_test_pred_knn.csv")
-y_test_knn = data["y_test_knn"]
-y_pred_knn = data["y_pred_knn"]
+# **3. Evaluasi Model KNN**
+# Baca data hasil prediksi untuk KNN
+data_knn = pd.read_csv("y_test_pred_knn.csv")
+y_test_knn = data_knn["y_test_knn"]
+y_pred_knn = data_knn["y_pred_knn"]
 
-# Menampilkan hasil evaluasi di Streamlit
 st.title("Evaluasi Model KNN")
 
-# Menampilkan Accuracy
+# Menampilkan Accuracy KNN
 accuracy_knn = accuracy_score(y_test_knn, y_pred_knn)
 st.subheader("Accuracy:")
 st.write(f"{accuracy_knn:.4f}")

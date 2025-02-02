@@ -43,7 +43,8 @@ df_tweet.drop_duplicates(subset=['full_text'], inplace=True)
 # df_tweet.drop_duplicates(inplace=True)
 
 # 📂 **2. Klasifikasi Sentimen**
-st.markdown("# 📂**2. Klasifikasi Sentimen**🧩")
+st.markdown("# 📂**2. Distribusi Sentimen**🧩")
+# st.markdown("# 📊 Distribusi Sentimen")
 
 def classify_sentiment(text):
     positive_phrases = [
@@ -101,7 +102,7 @@ df_tweet['sentiment'] = df_tweet['full_text'].apply(classify_sentiment)
 st.markdown("**a. Hasil Sentimen**")
 st.dataframe(df_tweet)
 
-st.markdown("# 📊 Distribusi Sentimen")
+# st.markdown("# 📊 Distribusi Sentimen")
 
 # Menghitung jumlah masing-masing sentimen
 sentiment_counts = df_tweet['sentiment'].value_counts()

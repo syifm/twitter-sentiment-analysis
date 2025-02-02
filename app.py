@@ -17,22 +17,21 @@ Ini bertujuan untuk mengidentifikasi isu utama yang dihadapi perusahaan.
 
 # 📂 **1. Import & Load Dataset**
 st.markdown("# 📂**1. Import & Load Dataset**🧩")
-st.markdown("**a. Import dataset**")
 
 # Memuat file CSV
 df = pd.read_csv('telkomsel.csv')
 
 # Menampilkan dataset
-st.markdown("**b. Lima baris awal dari dataset**")
+st.markdown("**a. Lima baris awal dari dataset**")
 st.dataframe(df.head())
 
 # Menampilkan hanya kolom yang berisi tweet pengguna
-st.markdown("**c. Dataframe dengan kolom yang berisi tweet pengguna**")
+st.markdown("**b. Dataframe dengan kolom yang berisi tweet pengguna**")
 df_tweet = pd.DataFrame(df[['full_text']])
 st.dataframe(df_tweet)
 
 # Preprocessing Data
-# st.markdown("**d. Setelah drop duplicates**")
+# st.markdown("**c. Setelah drop duplicates**")
 df_tweet['full_text'] = df_tweet['full_text'].astype(str).str.lower().str.strip()
 df_tweet.drop_duplicates(subset=['full_text'], inplace=True)
 # st.dataframe(df_tweet)
@@ -113,7 +112,7 @@ st.dataframe(sentiment_counts)
 
 # Membuat visualisasi distribusi sentimen
 st.write("**c. Visualisasi Distribusi Sentimen**")
-fig, ax = plt.subplots(figsize=(6, 4))
+fig, ax = plt.subplots(figsize=(6, 4))  
 
 sns.barplot(x=sentiment_counts.index, y=sentiment_counts.values,
             hue=sentiment_counts.index,
@@ -127,9 +126,7 @@ plt.ylabel('Jumlah')
 st.pyplot(fig)
 
 st.markdown("# 📂**3. Pre-Processing**🧩")
-# Memuat file CSV
-df_clean = pd.read_csv('data_bersih.csv')
-st.dataframe(df_clean)
+
 # import re
 # import string
 # import streamlit as st
@@ -228,30 +225,30 @@ st.dataframe(df_clean)
 st.markdown("# 📂**4. Analisis Topik**🧩")
 st.markdown("### **Analisis Topik Tweet Negatif**")
 
-st.markdown("#### **Cluster 0**")
-st.write("Jumlah Tweet: **592**")
+st.markdown("#### **📝 Cluster 0**")
+# st.write("Jumlah Tweet: **592**")
 
-st.markdown("##### Contoh Tweet:")
+st.markdown("#####✏️ Contoh Tweet:")
 st.write("- @febridifafzx @febridifafzxgaada masalah kak febri jika membeli paket menggunakan perangkat lain seperti melalui e-commerce. untuk paket awalnya memang kakak hanya bisa memilih paket lite saja yang gabisa tethring namun setelah kartu perdana diterima kakak bisa aktifin paket yang dapat")
 st.write("- @proxymous @proxymousmaaf ya kak atas ketidaknyamanan yang dialami. mengenai kendala sinyal gak stabil saat mati lampu yuk infoin dulu nomor hp waktu tanggal kendala mulai dialami lokasi (kec kel kab/kota) dan nomor telkomsel lain berkendala sama jika ada melalui dm. biar dibantu cek")
 st.write("- @aguesstybear @aguesstybear maaf kak agus untuk kendala pembelian paket infoin nomor hp capture keterangan gagal sama detail paket yang ingin diaktivasi via dm yuk untuk cek lebih lanjut. tks :) -frey")
 
-st.markdown("##### **Top Topics:**")
+st.markdown("##### **🔍 Top Topics: 🔍**")
 st.write("1. **kendala** (Kemunculan: 101)")
 st.write("2. **paket** (Kemunculan: 65)")
 st.write("3. **lokasi** (Kemunculan: 42)")
 
 st.markdown("---")
 
-st.markdown("#### **Cluster 1**")
-st.write("Jumlah Tweet: **80**")
+st.markdown("#### **📝 Cluster 1**")
+# st.write("Jumlah Tweet: **80**")
 
-st.markdown("##### Contoh Tweet:")
+st.markdown("#####✏️ Contoh Tweet:")
 st.write("- @hg76xp @hg76xp halo kak hendri. maaf jika aplikasi mytelkomsel di hp-nya masih berkendala ya. btw sudah coba uninstall dulu kemudian install kembali aplikasi mytelkomselnya di play store dengan aplikasi mytelkomsel versi 8.6.1 kak? kalo sudah tapi masih error juga silakan infoin nomor")
 st.write("- @ica_giannisa maafin banget ya kak giannisa. untuk kendala gak bisa akses aplikasi mytelkomsel silakan clear cache aplikasi uninstall aplikasi lalu install kembali dengan versi terbaru ya. jika masih berkendala infoin nomor hp tipe perangkat versi os ke dm supaya bisa dibantu cek lebih")
 st.write("- @rmsa814 @rmsa814 maaf ya kak setya atas ketidaknyamanan yang dialami. mengenai kendala aplikasi mytelkomsel zyad saranin kakak coba clear cache aplikasi lalu re-install aplikasi terlebih dahulu ya. namun jika masih tetap sama yuk infoin nomor hp waktu tanggal kejadian tipe hp sama")
 
-st.markdown("##### **Top Topics:**")
+st.markdown("##### **🔍 Top Topics: 🔍**")
 st.write("1. **aplikasi** (Kemunculan: 87)")
 st.write("2. **mytelkomsel** (Kemunculan: 61)")
 st.write("3. **clear** (Kemunculan: 48)")

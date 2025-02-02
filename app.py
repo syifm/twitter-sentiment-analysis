@@ -214,11 +214,12 @@ class TextPreprocessor:
         tokens = [self.lemmatizer.lemmatize(word) for word in tokens if word.isalpha()]
         return ' '.join(tokens)
 
-st.title("📝 Text Preprocessing dengan Streamlit")
 preprocessor = TextPreprocessor()
 # Tampilkan hasil
 st.write("### 📜 Data Sebelum & Sesudah Preprocessing")
 df_clean = df_tweet.copy()
+print(df_clean.head())  # Pastikan df_clean ada
+print(df_clean.columns)  # Pastikan kolom 'full_text' ada
 df_clean['clean_text'] = df_clean['full_text'].apply(preprocessor.preprocess_text)
 st.dataframe(df_clean[['full_text', 'clean_text']].head(10))
 

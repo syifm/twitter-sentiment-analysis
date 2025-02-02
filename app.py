@@ -223,6 +223,94 @@ st.markdown("# 📂**3. Pre-Processing**🧩")
 # df_clean['clean_text'] = df_clean['full_text'].apply(preprocessor.preprocess_text)
 # st.dataframe(df_clean[['full_text', 'clean_text']].head(10))
 
+st.markdown("# 📂**4. Analisis Topik**🧩")
+import streamlit as st
+import pandas as pd
+import nltk
+import string
+import re
+from collections import Counter
+from nltk.tokenize import word_tokenize
+from nltk.corpus import stopwords
+from nltk.stem import WordNetLemmatizer
+from sklearn.feature_extraction.text import TfidfVectorizer
+from sklearn.decomposition import PCA
+from sklearn.cluster import KMeans
+from sklearn.metrics import silhouette_score
+
+nltk.download('stopwords', quiet=True)
+nltk.download('punkt', quiet=True)
+nltk.download('wordnet', quiet=True)
+
+# Class untuk Clustering
+class NegativeTweetClustering:
+    def __init__(self, n_clusters, n_topics):
+        self.n_clusters = n_clusters
+        self.n_topics = n_topics
+        self.stopwords_id = set(stopwords.words('indonesian'))
+        self.lemmatizer = WordNetLemmatizer()
+        self.noise_words = {'telkomsel', 'kak', 'nih', 'aja', 'rp'}
+        self.stopwords_id.update(self.noise_words)
+
+    def preprocess_text(self, text):
+        tokens = word_tokenize(str(text).lower())
+        tokens = [
+            self.lemmatizer.lemmatize(word)
+            for word in tokens
+            if word.isalpha() and word not in self.stopwords_id
+        ]
+        return " ".join(tokens)
+
+    def cluster_and_analyze(self, df_tweet):
+        df_negatif = df_tweet[df_tweet['sentiment'] == 'negatif'].copy()
+        df_negatif['cleaned_text'] = df_negatif['full_text'].apply(self.preprocess_text)
+
+        vectorizer = TfidfVectorizer(max_features=1000)
+        X = vectorizer.fit_transform(df_negatif['cleaned_text'])
+
+        pca = PCA(n_components=2)
+        X_reduced = pca.fit_transform(X.toarray())
+
+        kmeans = KMeans(n_clusters=self.n_clusters, random_state=42)
+        df_negatif['cluster'] = kmeans.fit_predict(X_reduced)
+
+        silhouette_avg = silhouette_score(X_reduced, df_negatif['cluster'])
+        st.write(f"**Silhouette Score: {silhouette_avg:.4f}**")
+
+        cluster_results = []
+        for cluster in range(self.n_clusters):
+            cluster_data = df_negatif[df_negatif['cluster'] == cluster]
+            all_words = " ".join(cluster_data['cleaned_text']).split()
+            word_counts = Counter(all_words)
+            top_words = word_counts.most_common(self.n_topics)
+
+            cluster_results.append({
+                'Cluster': cluster,
+                'Jumlah Tweet': len(cluster_data),
+                'Topik Utama': ', '.join([word for word, _ in top_words]),
+                'Contoh Tweet': cluster_data['full_text'].iloc[:3].tolist()
+            })
+
+        return df_negatif, cluster_results
+
+# Clustering
+clustering = NegativeTweetClustering(n_clusters=3, n_topics=5)
+df_clustered, cluster_results = clustering.cluster_and_analyze(df_tweet)
+
+st.subheader("Data Setelah Clustering")
+st.dataframe(df_clustered[['full_text', 'cleaned_text', 'cluster']])
+
+st.subheader("Analisis Cluster")
+for result in cluster_results:
+    st.markdown(f"### Cluster {result['Cluster']}")
+    st.write(f"**Jumlah Tweet:** {result['Jumlah Tweet']}")
+    st.write(f"**Topik Utama:** {result['Topik Utama']}")
+    
+    st.write("**Contoh Tweet:**")
+    for tweet in result['Contoh Tweet']:
+        st.write(f"- {tweet}")
+
+
 # def _print_cluster_analysis(self, cluster_results):
 #     st.subheader("🔍 Analisis Topik Tweet Negatif")
 #     for cluster, info in cluster_results.items():

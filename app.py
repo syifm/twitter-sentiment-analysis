@@ -113,7 +113,7 @@ st.dataframe(sentiment_counts)
 
 # Membuat visualisasi distribusi sentimen
 st.write("**c. Visualisasi Distribusi Sentimen**")
-fig, ax = plt.subplots(figsize=(1, 2))  
+fig, ax = plt.subplots(figsize=(2, 4))  
 
 sns.barplot(x=sentiment_counts.index, y=sentiment_counts.values,
             hue=sentiment_counts.index,

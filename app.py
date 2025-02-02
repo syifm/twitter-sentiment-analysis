@@ -35,7 +35,7 @@ st.dataframe(df_tweet)
 st.markdown("**d. Setelah drop duplicates**")
 df_tweet['full_text'] = df_tweet['full_text'].astype(str).str.lower().str.strip()
 df_tweet.drop_duplicates(subset=['full_text'], inplace=True)
-st.dataframe(df_tweet)
+# st.dataframe(df_tweet)
 
 # df=pd.read_csv('telkomsel.csv')
 # df_tweet = pd.DataFrame(df[['full_text']])
@@ -125,6 +125,7 @@ plt.ylabel('Jumlah')
 
 st.pyplot(fig)
 
+st.markdown("# 📂**3. Pre-Processing**🧩")
 # Baca data hasil prediksi
 data = pd.read_csv("y_test_pred.csv")
 y_test = data["y_test"]

@@ -32,7 +32,7 @@ df_tweet = pd.DataFrame(df[['full_text']])
 st.dataframe(df_tweet)
 
 # Preprocessing Data
-st.markdown("**d. Setelah drop duplicates**")
+# st.markdown("**d. Setelah drop duplicates**")
 df_tweet['full_text'] = df_tweet['full_text'].astype(str).str.lower().str.strip()
 df_tweet.drop_duplicates(subset=['full_text'], inplace=True)
 # st.dataframe(df_tweet)

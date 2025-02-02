@@ -37,14 +37,13 @@ df_tweet['full_text'] = df_tweet['full_text'].astype(str).str.lower().str.strip(
 df_tweet.drop_duplicates(subset=['full_text'], inplace=True)
 st.dataframe(df_tweet)
 
-df=pd.read_csv('telkomsel.csv')
-df_tweet = pd.DataFrame(df[['full_text']])
-df_tweet['full_text'] = df_tweet['full_text'].str.lower()
-df_tweet.drop_duplicates(inplace=True)
+# df=pd.read_csv('telkomsel.csv')
+# df_tweet = pd.DataFrame(df[['full_text']])
+# df_tweet['full_text'] = df_tweet['full_text'].str.lower()
+# df_tweet.drop_duplicates(inplace=True)
 
-st.markdown("""
-# **Distribusi Sentimen** 
-""")
+# 📂 **2. Klasifikasi Sentimen**
+st.markdown("# 📂**2. Klasifikasi Sentimen**🧩")
 
 def classify_sentiment(text):
     positive_phrases = [
@@ -98,10 +97,22 @@ def classify_sentiment(text):
 
 df_tweet['sentiment'] = df_tweet['full_text'].apply(classify_sentiment)
 
+# Menampilkan hasil analisis sentimen
+st.markdown("**a. Hasil Sentimen**")
+st.dataframe(df_tweet)
+
+st.markdown("# 📊 Distribusi Sentimen")
+
+# Menghitung jumlah masing-masing sentimen
 sentiment_counts = df_tweet['sentiment'].value_counts()
 
-# Buat figure
-fig, ax = plt.subplots(figsize=(6, 4))  # Tambahkan ini
+# Menampilkan tabel jumlah sentimen
+st.write("**b. Jumlah Sentimen**")
+st.dataframe(sentiment_counts)
+
+# Membuat visualisasi distribusi sentimen
+st.write("**c. Visualisasi Distribusi Sentimen**")
+fig, ax = plt.subplots(figsize=(6, 4))  
 
 sns.barplot(x=sentiment_counts.index, y=sentiment_counts.values,
             hue=sentiment_counts.index,

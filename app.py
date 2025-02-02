@@ -15,6 +15,28 @@ Untuk memahami persepsi pelanggan terhadap perusahaan dengan melakukan analisis 
 Ini bertujuan untuk mengidentifikasi isu utama yang dihadapi perusahaan.          
 """)
 
+# 📂 **1. Import & Load Dataset**
+st.markdown("# 📂**1. Import & Load Dataset**🧩")
+st.markdown("**a. Import dataset**")
+
+# Memuat file CSV
+df = pd.read_csv('telkomsel.csv')
+
+# Menampilkan dataset
+st.markdown("**b. Lima baris awal dari dataset**")
+st.dataframe(df.head())
+
+# Menampilkan hanya kolom yang berisi tweet pengguna
+st.markdown("**c. Dataframe dengan kolom yang berisi tweet pengguna**")
+df_tweet = pd.DataFrame(df[['full_text']])
+st.dataframe(df_tweet)
+
+# Preprocessing Data
+st.markdown("**d. Setelah drop duplicates**")
+df_tweet['full_text'] = df_tweet['full_text'].astype(str).str.lower().str.strip()
+df_tweet.drop_duplicates(subset=['full_text'], inplace=True)
+st.dataframe(df_tweet)
+
 df=pd.read_csv('telkomsel.csv')
 df_tweet = pd.DataFrame(df[['full_text']])
 df_tweet['full_text'] = df_tweet['full_text'].str.lower()

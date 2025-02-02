@@ -126,7 +126,8 @@ plt.ylabel('Jumlah')
 st.pyplot(fig)
 
 st.markdown("# 📂**3. Pre-Processing**🧩")
-
+df_clean = pd.read(data_bersih.csv)
+st.dataframe(df_clean)
 # import re
 # import string
 # import streamlit as st

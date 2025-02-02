@@ -218,13 +218,9 @@ st.title("📝 Text Preprocessing dengan Streamlit")
 preprocessor = TextPreprocessor()
 # Tampilkan hasil
 st.write("### 📜 Data Sebelum & Sesudah Preprocessing")
-if 'full_text' in df_tweet.columns:
-    df_clean = df_tweet.copy()
-    df_clean['clean_text'] = df_clean['full_text'].apply(preprocessor.preprocess_text)
-
-    # Tampilkan hasil
-    st.write("### 📜 Data Sebelum & Sesudah Preprocessing")
-    st.dataframe(df_clean[['full_text', 'clean_text']].head(10))
+df_clean = df_tweet.copy()
+df_clean['clean_text'] = df_clean['full_text'].apply(preprocessor.preprocess_text)
+st.dataframe(df_clean[['full_text', 'clean_text']].head(10))
 
 def _print_cluster_analysis(self, cluster_results):
     st.subheader("🔍 Analisis Topik Tweet Negatif")

@@ -114,7 +114,6 @@ st.dataframe(sentiment_counts)
 # Membuat visualisasi distribusi sentimen
 st.write("**c. Visualisasi Distribusi Sentimen**")
 fig, ax = plt.subplots(figsize=(6, 4))
-ax.plot([1, 2, 3], [4, 5, 6])
 
 sns.barplot(x=sentiment_counts.index, y=sentiment_counts.values,
             hue=sentiment_counts.index,
@@ -126,8 +125,6 @@ plt.xlabel('Sentimen')
 plt.ylabel('Jumlah')
 
 st.pyplot(fig)
-
-st.pyplot(fig, use_container_width=True)
 
 st.markdown("# 📂**3. Pre-Processing**🧩")
 # Memuat file CSV

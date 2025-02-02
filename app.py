@@ -226,44 +226,18 @@ if 'full_text' in df_tweet.columns:
     st.write("### 📜 Data Sebelum & Sesudah Preprocessing")
     st.dataframe(df_clean[['full_text', 'clean_text']].head(10))
 
-# Baca data hasil prediksi
-data = pd.read_csv("y_test_pred.csv")
-y_test = data["y_test"]
-y_pred = data["y_pred"]
+def _print_cluster_analysis(self, cluster_results):
+    st.subheader("🔍 Analisis Topik Tweet Negatif")
+    for cluster, info in cluster_results.items():
+        st.write(f"### Cluster {cluster}")
+        st.write(f"**Jumlah Tweet:** {info['tweet_count']}")
 
-# Menampilkan hasil evaluasi di Streamlit
-st.title("Evaluasi Model Naive Bayes")
+        st.write("**Contoh Tweet:**")
+        for tweet in info['sample_tweets']:
+            st.write(f"- {tweet}")
 
-# Menampilkan Accuracy
-accuracy = accuracy_score(y_test, y_pred)
-st.subheader("Accuracy:")
-st.write(f"{accuracy:.4f}")
+        st.write("**Top Topics:**")
+        for i, (topic, count) in enumerate(info['topics'], 1):
+            st.write(f"{i}. **{topic}** (Kemunculan: {count})")
 
-# Mengubah classification report menjadi DataFrame
-report_dict = classification_report(y_test, y_pred, output_dict=True)
-report_df = pd.DataFrame(report_dict).transpose()
-
-# Menampilkan classification report dalam bentuk tabel
-st.subheader("Classification Report:")
-st.dataframe(report_df)
-
-# Baca data hasil prediksi
-data = pd.read_csv("y_test_pred_knn.csv")
-y_test_knn = data["y_test_knn"]
-y_pred_knn = data["y_pred_knn"]
-
-# Menampilkan hasil evaluasi di Streamlit
-st.title("Evaluasi Model KNN")
-
-# Menampilkan Accuracy
-accuracy_knn = accuracy_score(y_test_knn, y_pred_knn)
-st.subheader("Accuracy:")
-st.write(f"{accuracy_knn:.4f}")
-
-# Mengubah classification report menjadi DataFrame
-report_dict_knn = classification_report(y_test_knn, y_pred_knn, output_dict=True)
-report_df_knn = pd.DataFrame(report_dict_knn).transpose()
-
-# Menampilkan classification report dalam bentuk tabel
-st.subheader("Classification Report:")
-st.dataframe(report_df_knn)
+        st.write("---")
